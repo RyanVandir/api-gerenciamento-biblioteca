@@ -16,6 +16,7 @@ public class Book {
     Integer yearPublished;
     Integer authorId;
 
+
     public Book(Integer id, String title, Integer yearPublished,  Integer authorId) {
         validate(title, yearPublished, authorId);
         this.id = id;

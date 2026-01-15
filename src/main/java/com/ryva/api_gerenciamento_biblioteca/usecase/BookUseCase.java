@@ -18,10 +18,9 @@ public class BookUseCase implements BookUseCasePort {
     private final BookServicePort bookService;
     private final AuthorServicePort authorService;
 
-
     @Override
     public Book createdBook(Book book) {
-        if (!authorService.existById(book.getAuthorId())){
+        if (!authorService.existById(book.getAuthorId())) {
             throw new AuthorNotFoundException("Nenhum autor encontrado");
         }
         return bookService.createBook(book);
@@ -38,6 +37,6 @@ public class BookUseCase implements BookUseCasePort {
 
     @Override
     public Book updateBook(Integer id, Book book) {
-        return  bookService.updateBook(id, book);
+        return bookService.updateBook(id, book);
     }
 }

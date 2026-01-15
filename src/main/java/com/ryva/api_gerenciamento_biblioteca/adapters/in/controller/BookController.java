@@ -1,8 +1,8 @@
 package com.ryva.api_gerenciamento_biblioteca.adapters.in.controller;
 
+import com.ryva.api_gerenciamento_biblioteca.adapters.in.assembler.BookAssembler;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.BookDto;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.BookResponse;
-import com.ryva.api_gerenciamento_biblioteca.adapters.mapper.BookMapper;
 import com.ryva.api_gerenciamento_biblioteca.port.in.BookUseCasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class BookController {
 
-    private final BookMapper bookMapper;
+    private final BookAssembler bookAssembler;
     private final BookUseCasePort bookUseCase;
 
     @ResponseBody
@@ -25,14 +25,14 @@ public class BookController {
     @PostMapping
     public ResponseEntity<BookResponse> createBook(@RequestBody BookDto bookDto) {
         return ResponseEntity.ok(
-                bookMapper.toResponse(bookUseCase.createdBook(bookMapper.toModel(bookDto)))
+                bookAssembler.toResponse(bookUseCase.createdBook(bookAssembler.toModel(bookDto)))
         );
     }
 
     @GetMapping
     public ResponseEntity<List<BookResponse>> getBooks() {
         return ResponseEntity.ok(
-                bookMapper.toResponse(bookUseCase.listBooks())
+                bookAssembler.toResponse(bookUseCase.listBooks())
         );
     }
 
@@ -40,9 +40,9 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/{id}")
     public ResponseEntity<BookResponse> updateBook(@PathVariable Integer id,
-                                           @RequestBody BookDto bookDto) {
+                                                   @RequestBody BookDto bookDto) {
         return ResponseEntity.ok(
-                bookMapper.toResponse(bookUseCase.updateBook(id, bookMapper.toModel(bookDto)))
+                bookAssembler.toResponse(bookUseCase.updateBook(id, bookAssembler.toModel(bookDto)))
         );
     }
 

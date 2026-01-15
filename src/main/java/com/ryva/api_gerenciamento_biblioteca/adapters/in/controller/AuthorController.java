@@ -1,8 +1,8 @@
 package com.ryva.api_gerenciamento_biblioteca.adapters.in.controller;
 
+import com.ryva.api_gerenciamento_biblioteca.adapters.in.assembler.AuthorAssembler;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorDto;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorResponse;
-import com.ryva.api_gerenciamento_biblioteca.adapters.mapper.AuthorMapper;
 import com.ryva.api_gerenciamento_biblioteca.port.in.AuthorUseCasePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,21 +17,21 @@ import java.util.List;
 public class AuthorController {
 
     private final AuthorUseCasePort authorUseCase;
-    private final AuthorMapper authorMapper;
+    private final AuthorAssembler authorAssembler;
 
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<AuthorResponse> createAuthor(@RequestBody AuthorDto authorDto) {
         return ResponseEntity.ok(
-                authorMapper.toResponse(authorUseCase.createAuthor(authorMapper.toModel(authorDto)))
+                authorAssembler.toResponse(authorUseCase.createAuthor(authorAssembler.toModel(authorDto)))
         );
     }
 
     @GetMapping
     public ResponseEntity<List<AuthorResponse>> getAuthors() {
         return ResponseEntity.ok(
-                authorMapper.toResponse(authorUseCase.listAuthors())
+                authorAssembler.toResponse(authorUseCase.listAuthors())
         );
     }
 
@@ -40,7 +40,7 @@ public class AuthorController {
     @DeleteMapping("{id}")
     public ResponseEntity<AuthorResponse> deleteAuthor(@PathVariable Integer id) {
         return ResponseEntity.ok(
-                authorMapper.toResponse(authorUseCase.deleteAuthor(id))
+                authorAssembler.toResponse(authorUseCase.deleteAuthor(id))
         );
     }
 }
