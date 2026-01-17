@@ -14,4 +14,6 @@ public interface AuthorServicePort {
 
     Author deleteAuthor(Integer id);
 
+    Author findById(Integer id);
+
 }

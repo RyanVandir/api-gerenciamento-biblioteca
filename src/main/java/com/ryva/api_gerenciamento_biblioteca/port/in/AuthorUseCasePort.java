@@ -9,4 +9,6 @@ public interface AuthorUseCasePort {
     Author createAuthor(Author author);
     List<Author> listAuthors();
     Author deleteAuthor(Integer id);
+    Author findById(Integer id);
+
 }

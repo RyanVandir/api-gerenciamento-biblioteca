@@ -35,4 +35,12 @@ public class AuthorUseCase implements AuthorUseCasePort {
     public Author deleteAuthor(Integer id) {
         return authorService.deleteAuthor(id);
     }
+
+    @Override
+    public Author findById(Integer id) {
+        if (authorService.findById(id) == null) {
+            throw new AuthorNotFoundException("Id não encontrado");
+        }
+        return authorService.findById(id);
+    }
 }

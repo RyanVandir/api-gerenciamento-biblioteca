@@ -43,4 +43,11 @@ public class AuthorController {
                 authorAssembler.toResponse(authorUseCase.deleteAuthor(id))
         );
     }
+    
+    @GetMapping("{id}")
+    public ResponseEntity<AuthorResponse> getAuthor(@PathVariable Integer id) {
+        return ResponseEntity.ok(
+                authorAssembler.toResponse(authorUseCase.findById(id))
+        );
+    }
 }

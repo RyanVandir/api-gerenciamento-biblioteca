@@ -41,4 +41,11 @@ public class AuthorService implements AuthorServicePort {
         authorRepository.delete(authorEntity);
         return authorMapper.toModel(authorEntity);
     }
+
+    @Override
+    public Author findById(Integer id) {
+        AuthorEntity authorEntity = authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException("Nenhum autor encontrado"));
+        return authorMapper.toModel(authorEntity);
+    }
 }
