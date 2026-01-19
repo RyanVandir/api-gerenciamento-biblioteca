@@ -1,9 +1,9 @@
 package com.ryva.api_gerenciamento_biblioteca.adapters.out.entity;
 
-import com.ryva.api_gerenciamento_biblioteca.domain.model.Book;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,4 +18,8 @@ public class AuthorEntity {
     private Integer id;
     private String name;
     private String nationality;
+
+    @OneToMany(mappedBy = "author",
+            fetch = FetchType.LAZY)
+    private List<BookEntity> books =  new ArrayList<>();
 }

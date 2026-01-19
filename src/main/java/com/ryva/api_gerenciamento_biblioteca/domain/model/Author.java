@@ -4,6 +4,7 @@ import com.ryva.api_gerenciamento_biblioteca.domain.exception.InvalidAuthorExcep
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,13 +15,14 @@ public class Author {
     private String name;
     private String nationality;
 
-    List<Integer> bookIds;
+    List<Book> books;
 
-    public Author(Integer id, String name, String nationality) {
+    public Author(Integer id, String name, String nationality, List<Book> books) {
         validate(name, nationality);
         this.id = id;
         this.name = name;
         this.nationality = nationality;
+        this.books = books != null ? books : new ArrayList<>();
     }
 
     public Author(String name, String nationality) {

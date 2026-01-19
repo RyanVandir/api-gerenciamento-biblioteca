@@ -1,5 +1,6 @@
 package com.ryva.api_gerenciamento_biblioteca.adapters.in.assembler;
 
+import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorCreateResponse;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorDto;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorResponse;
 import com.ryva.api_gerenciamento_biblioteca.adapters.mapper.AuthorMapper;
@@ -23,6 +24,10 @@ public class AuthorAssembler {
     // DOMAIN -> API (RESPONSE)
     public AuthorResponse toResponse(Author author) {
         return authorMapper.toResponse(author);
+    }
+
+    public AuthorCreateResponse toCreateResponse(Author author) {
+        return authorMapper.toCreateResponse(author);
     }
 
     public List<AuthorResponse> toResponse(List<Author> authors) {

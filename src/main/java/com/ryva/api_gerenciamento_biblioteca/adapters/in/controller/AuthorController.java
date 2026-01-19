@@ -1,6 +1,7 @@
 package com.ryva.api_gerenciamento_biblioteca.adapters.in.controller;
 
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.assembler.AuthorAssembler;
+import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorCreateResponse;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorDto;
 import com.ryva.api_gerenciamento_biblioteca.adapters.in.dto.AuthorResponse;
 import com.ryva.api_gerenciamento_biblioteca.port.in.AuthorUseCasePort;
@@ -22,9 +23,11 @@ public class AuthorController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<AuthorResponse> createAuthor(@RequestBody AuthorDto authorDto) {
+        public ResponseEntity<AuthorCreateResponse> createAuthor(@RequestBody AuthorDto authorDto) {
         return ResponseEntity.ok(
-                authorAssembler.toResponse(authorUseCase.createAuthor(authorAssembler.toModel(authorDto)))
+                authorAssembler.toCreateResponse(
+                        authorUseCase.createAuthor(authorAssembler.toModel(authorDto))
+                )
         );
     }
 
